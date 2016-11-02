@@ -1,0 +1,18 @@
+Gradient
+------------------------------
+Blue	Gold
+1A1E5A	FA9B00
+122D98	F4CA12
+
+Blue	Orange	Gold
+00329E	F26800	FFCB00
+0050B9	FA9800	FBE112
+
+
+Flat
+------------------------------
+Blue	Gold	White	Gray
+1A1F71	F7B600	FFFFFF	5C5C5C
+
+Blue	Orange	Gold
+003EA9	EF8400	FFD700
