@@ -64,6 +64,7 @@ public class PlayerController: MonoBehaviour {
         m_SlideChanged(true);
         transform.position = m_Targets[m_InitialSlide].transform.position;
 		transform.parent = m_Targets [m_InitialSlide];
+		transform.localRotation = Quaternion.identity;
         m_TimeOut = 0;
         m_DurationOfCurrentSlide = m_Targets[m_InitialSlide].GetComponent<AbstractSlide>().Duration;
     }

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: c953b06fbfd1af94bb8029e26a653e74
-timeCreated: 1478114437
+guid: bee8ffe3215f4b94a9b9ddf0f3e2aa71
+timeCreated: 1478190311
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -11,7 +11,7 @@ ModelImporter:
     3300000: //RootNode
     4300000: Sphere
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
   animations:

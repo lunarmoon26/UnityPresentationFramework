@@ -5,9 +5,9 @@ public class CustomizeAnimation : MonoBehaviour {
 
 
 	[SerializeField] private bool m_AutoRotate = true;
-	[Range(0f, 50f)] [SerializeField] private float m_RotateSpeedX = 0f;
-	[Range(0f, 50f)] [SerializeField] private float m_RotateSpeedY = 10.0f;
-	[Range(0f, 50f)] [SerializeField] private float m_RotateSpeedZ = 0f;
+	[Range(-50f, 50f)] [SerializeField] private float m_RotateSpeedX = 0f;
+	[Range(-50f, 50f)] [SerializeField] private float m_RotateSpeedY = 10.0f;
+	[Range(-50f, 50f)] [SerializeField] private float m_RotateSpeedZ = 0f;
 
 	[SerializeField] private bool m_AutoVibrate = true;
 	[Range(0f, 10f)] [SerializeField] private float m_FrequencyX = 1.0f;

@@ -81,6 +81,10 @@ public class PresentationCam : PivotBasedCameraRig
         if (m_Target == null) return;
         // Move the rig towards target position.
         transform.position = Vector3.Lerp(transform.position, m_Target.position, deltaTime * m_MoveSpeed);
+		if (m_TurnSmoothing > 0)
+			transform.rotation = Quaternion.Slerp (transform.rotation, m_Target.rotation, deltaTime * m_TurnSmoothing);
+		else
+			transform.localRotation = m_Target.rotation;
 
         if (PositionApproximately(transform, m_Target.transform, k_FocusTolerance) && m_HasSlideChanged) {
             m_HasSlideChanged = false;
