@@ -62,7 +62,7 @@
 			fixed4 msk = tex2D(_Mask, i.uv);
 
 			col *= _Color;
-			if(msk.a < _CutOff || (_AlphaKeep < 1 && (msk.r + 0.001 < _AlphaKeep || msk.r - 0.001 > _AlphaKeep))) discard;
+			if(msk.a < _CutOff || (_AlphaKeep < 1 && (msk.r + 0.005 < _AlphaKeep || msk.r - 0.005 > _AlphaKeep))) discard;
 			col.a *= msk.a;
 			return col;
 		}
