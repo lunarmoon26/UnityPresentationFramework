@@ -11,6 +11,8 @@ public class CoreAnimationEditor : Editor
 
     SerializedProperty enterDuration;
     SerializedProperty exitDuration;
+    SerializedProperty enterDelay;
+    SerializedProperty exitDelay;
 
     SerializedProperty positionInFrom;
     SerializedProperty rotationInFrom;
@@ -43,15 +45,17 @@ public class CoreAnimationEditor : Editor
         enterAnimation = serializedObject.FindProperty("enterAnimation");
         exitAnimation = serializedObject.FindProperty("exitAnimation");
 
+        enterDelay = serializedObject.FindProperty("m_EnterDelay");
         enterDuration = serializedObject.FindProperty("m_EnterDuration");
+        exitDelay = serializedObject.FindProperty("m_ExitDelay");
         exitDuration = serializedObject.FindProperty("m_ExitDuration");
 
         positionInFrom = serializedObject.FindProperty("m_PositionInFrom");
-        rotationInFrom = serializedObject.FindProperty("m_RotationInFrom");
+        rotationInFrom = serializedObject.FindProperty("m_RotationInFromVector3");
         scaleInFrom = serializedObject.FindProperty("m_ScaleInFrom");
 
         positionOutTo = serializedObject.FindProperty("m_PositionOutTo");
-        rotationOutTo = serializedObject.FindProperty("m_RotationOutTo");
+        rotationOutTo = serializedObject.FindProperty("m_RotationOutToVector3");
         scaleOutTo = serializedObject.FindProperty("m_ScaleOutTo");
 
         autoRotate = serializedObject.FindProperty("m_AutoRotate");
@@ -79,7 +83,9 @@ public class CoreAnimationEditor : Editor
         serializedObject.Update();
 
         EditorGUILayout.PropertyField(enterAnimation);
-        if(enterAnimation.enumValueIndex != (int)CoreAnimation.EnterAnimation.None && 
+        if(enterAnimation.enumValueIndex != (int)CoreAnimation.EnterAnimation.None)
+            EditorGUILayout.PropertyField(enterDelay, new GUIContent(" Enter Delay"));
+        if (enterAnimation.enumValueIndex != (int)CoreAnimation.EnterAnimation.None && 
             enterAnimation.enumValueIndex != (int)CoreAnimation.EnterAnimation.Appear)
         {
             EditorGUILayout.Slider(enterDuration, 0f, 10f, new GUIContent(" Enter Duration"));
@@ -95,6 +101,8 @@ public class CoreAnimationEditor : Editor
 
 
         EditorGUILayout.PropertyField(exitAnimation);
+        if (exitAnimation.enumValueIndex != (int)CoreAnimation.ExitAnimation.None)
+            EditorGUILayout.PropertyField(exitDelay, new GUIContent(" Exit Delay"));
         if (exitAnimation.enumValueIndex != (int)CoreAnimation.ExitAnimation.None &&
             exitAnimation.enumValueIndex != (int)CoreAnimation.ExitAnimation.Disappear)
         {

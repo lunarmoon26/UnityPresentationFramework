@@ -27,15 +27,20 @@ public class CoreAnimation : MonoBehaviour {
     public ExitAnimation exitAnimation = ExitAnimation.None;
 
 
+    [SerializeField] private float m_EnterDelay = 0;
     [Range(0f, 10f)] [SerializeField] private float m_EnterDuration = 2;
+
+    [SerializeField] private float m_ExitDelay = 0;
     [Range(0f, 10f)] [SerializeField] private float m_ExitDuration = 2;
 
     [SerializeField] private Vector3 m_PositionInFrom;
-    [SerializeField] private Vector3 m_RotationInFrom;
+    [SerializeField] private Vector3 m_RotationInFromVector3;
+    private Quaternion m_RotationInFrom;
     [SerializeField] private Vector3 m_ScaleInFrom;
 
     [SerializeField] private Vector3 m_PositionOutTo;
-    [SerializeField] private Vector3 m_RotationOutTo;
+    [SerializeField] private Vector3 m_RotationOutToVector3;
+    private Quaternion m_RotationOutTo;
     [SerializeField] private Vector3 m_ScaleOutTo;
 
     [SerializeField] private bool m_AutoRotate = true;
@@ -76,12 +81,23 @@ public class CoreAnimation : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         // Setting up size after all child loaded
-        if (enterAnimation == EnterAnimation.TransformIn)
-        {
-            transform.localPosition = m_PositionInFrom;
-            transform.localRotation = Quaternion.Euler(m_RotationInFrom);
-            transform.localScale = m_ScaleInFrom;
-            StartCoroutine(TransformInCoroutine());
+
+    }
+
+    public void Enter()
+    {
+        switch (enterAnimation) {
+            case EnterAnimation.Appear:
+                StartCoroutine(AppearCoroutine());
+                break;
+            case EnterAnimation.FadeIn:
+                StartCoroutine(FadeInCoroutine());
+                break;
+            case EnterAnimation.TransformIn:
+                StartCoroutine(TransformInCoroutine());
+                break;
+            default:
+                break;
         }
     }
 	
@@ -118,15 +134,38 @@ public class CoreAnimation : MonoBehaviour {
 		return magnitude * Mathf.Sin (frequency * Time.time * Mathf.PI + phase);
     }
 
+    private IEnumerator AppearCoroutine()
+    {
+        m_MeshRenderer.enabled = false;
+
+        yield return new WaitForSeconds(m_EnterDelay);
+
+        m_MeshRenderer.enabled = true;
+        m_Entered = true;
+    }
+
+    private IEnumerator FadeInCoroutine()
+    {
+        return null;
+    }
+
     private IEnumerator TransformInCoroutine()
     {
+        m_RotationInFrom = Quaternion.Euler(m_RotationInFromVector3);
+        transform.localPosition = m_PositionInFrom;
+        transform.localRotation = m_RotationInFrom;
+        transform.localScale = m_ScaleInFrom;
+
+        yield return new WaitForSeconds(m_EnterDelay);
+
         for (float t = 0.0f; t < m_EnterDuration; t += Time.deltaTime)
         {
-            transform.localPosition = Vector3.Lerp(transform.localPosition, m_OriginalPosition, t / m_EnterDuration);
-            transform.localRotation = Quaternion.Slerp(transform.localRotation, m_OriginalRotation, t / m_EnterDuration);
-            transform.localScale = Vector3.Lerp(transform.localScale, m_OriginalScale, t / m_EnterDuration);
+            transform.localPosition = Vector3.Lerp(m_PositionInFrom, m_OriginalPosition, Mathf.Sqrt(t / m_EnterDuration));
+            transform.localRotation = Quaternion.Slerp(m_RotationInFrom, m_OriginalRotation, Mathf.Sqrt(t / m_EnterDuration));
+            transform.localScale = Vector3.Lerp(m_ScaleInFrom, m_OriginalScale, Mathf.Sqrt(t / m_EnterDuration));
             yield return null;
         }
+
         transform.localPosition = m_OriginalPosition;
         transform.localRotation = m_OriginalRotation;
         transform.localScale = m_OriginalScale;
