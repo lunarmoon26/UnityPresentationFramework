@@ -86,7 +86,7 @@ public class PresentationCam : PivotBasedCameraRig
 		else
 			transform.localRotation = m_Target.rotation;
 
-        if (PositionApproximately(transform, m_Target.transform, k_FocusTolerance) && m_HasSlideChanged) {
+        if (Vector3.Distance(transform.position, m_Target.transform.position) <= k_FocusTolerance && m_HasSlideChanged) {
             m_HasSlideChanged = false;
             if (m_Player != null && m_Player.CurrentSlide != null) m_Player.CurrentSlide.OnFocused();
         }
@@ -137,11 +137,6 @@ public class PresentationCam : PivotBasedCameraRig
             m_Pivot.localRotation = m_PivotTargetRot;
             transform.localRotation = m_TransformTargetRot;
         }
-    }
-    private bool PositionApproximately(Transform a, Transform b, float tolerance) {
-        return (Mathf.Abs(a.position.x - b.position.x) <= tolerance &&
-                Mathf.Abs(a.position.y - b.position.y) <= tolerance &&
-                Mathf.Abs(a.position.z - b.position.z) <= tolerance);
     }
 
     public void SetSlideChanged(bool changed) {
