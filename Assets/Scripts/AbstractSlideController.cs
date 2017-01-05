@@ -2,12 +2,14 @@
 using System.Collections;
 
 
-public abstract class AbstractSlide : MonoBehaviour {
+public abstract class AbstractSlideController : MonoBehaviour {
 
     [SerializeField]
     private int m_Duration = 3;
     [SerializeField]
     private string m_SlideName = "";
+	[SerializeField]
+	private bool m_IsHidden = false;
 
     public delegate void OnFocusingEventDelegate();
     private OnFocusingEventDelegate m_OnFocusing;
@@ -18,14 +20,16 @@ public abstract class AbstractSlide : MonoBehaviour {
     public delegate void OnBlurredEventDelegate();
     private OnBlurredEventDelegate m_OnBlurred;
 
-    private delegate void StartEnteringDelegate();
-    private StartEnteringDelegate m_StartEntering;
+    protected delegate void StartEnteringDelegate();
+    protected StartEnteringDelegate m_StartEntering;
+
+	protected bool m_IsFirstTimeEnter = true;
 
     // Use this for initialization
     protected virtual void Awake () {
-        m_OnFocusing += WhenFocusing;
-        m_OnFocused += WhenFocused;
-        m_OnBlurred += WhenBlurred;
+		m_OnFocusing += OnFocusing;
+		m_OnFocused += OnFocused;
+		m_OnBlurred += OnBlurred;
 
         for(int i = 0; i < transform.childCount; i++)
         {
@@ -37,30 +41,28 @@ public abstract class AbstractSlide : MonoBehaviour {
         }
     }
 
-    void Start()
-    {
-        if(m_StartEntering != null) m_StartEntering();
-    }
-
-    protected abstract void WhenFocusing();
-    protected abstract void WhenFocused();
-    protected abstract void WhenBlurred();
+    protected abstract void OnFocusing();
+    protected abstract void OnFocused();
+    protected abstract void OnBlurred();
 
     public int Duration {
         get { return m_Duration; }
     }
 
-    public OnFocusingEventDelegate OnFocusing
+	public bool Hidden {
+		get { return m_IsHidden; }
+	}
+    public OnFocusingEventDelegate Focusing
     {
         get { return m_OnFocusing; }
     }
 
-    public OnFocusedEventDelegate OnFocused
+    public OnFocusedEventDelegate Focused
     {
         get { return m_OnFocused; }
     }
 
-    public OnBlurredEventDelegate OnBlurred
+    public OnBlurredEventDelegate Blurred
     {
         get { return m_OnBlurred; }
     }

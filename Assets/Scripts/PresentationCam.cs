@@ -4,7 +4,6 @@ using UnityStandardAssets.CrossPlatformInput;
 using UnityStandardAssets.Cameras;
 using UnityStandardAssets.ImageEffects;
 
-
 public class PresentationCam : PivotBasedCameraRig
 {
     // This script is designed to be placed on the root object of a camera rig,
@@ -43,6 +42,8 @@ public class PresentationCam : PivotBasedCameraRig
     private bool m_HasSlideChanged = false;
     private float k_FocusTolerance = 0.01f;
 
+	[SerializeField] private Transform m_InitialPosition;
+
     protected override void Awake()
     {
         base.Awake();
@@ -55,17 +56,22 @@ public class PresentationCam : PivotBasedCameraRig
         m_TransformTargetRot = transform.localRotation;
         m_Player = m_Target.GetComponent<PlayerController>();
         if (m_Player != null) m_Player.SetSlideChangedDelegate(SetSlideChanged);
+		if (m_InitialPosition != null) {
+			transform.position = m_InitialPosition.position;
+			transform.localRotation = m_InitialPosition.rotation;
+		}
     }
 
 
     protected void Update()
     {
-		if(m_AllowMouseRotation) HandleRotationMovement();
-        if (m_LockCursor && Input.GetMouseButtonUp(0))
-        {
-            Cursor.lockState = m_LockCursor ? CursorLockMode.Locked : CursorLockMode.None;
-            Cursor.visible = !m_LockCursor;
-        }
+		if (m_AllowMouseRotation)
+			HandleRotationMovement ();
+		if (m_LockCursor && Input.GetMouseButtonUp (0)) {
+			Cursor.lockState = m_LockCursor ? CursorLockMode.Locked : CursorLockMode.None;
+			Cursor.visible = !m_LockCursor;
+		}
+
     }
 
 
@@ -88,7 +94,7 @@ public class PresentationCam : PivotBasedCameraRig
 
         if (Vector3.Distance(transform.position, m_Target.transform.position) <= k_FocusTolerance && m_HasSlideChanged) {
             m_HasSlideChanged = false;
-            if (m_Player != null && m_Player.CurrentSlide != null) m_Player.CurrentSlide.OnFocused();
+            if (m_Player != null && m_Player.CurrentSlide != null) m_Player.CurrentSlide.Focused();
         }
 
     }

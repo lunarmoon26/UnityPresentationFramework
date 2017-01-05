@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SampleSlide : AbstractSlide
+public class SampleSlide : AbstractSlideController
 {
 
     // Use this for initialization
@@ -11,17 +11,22 @@ public class SampleSlide : AbstractSlide
         // Your code..
     }
 
-    protected override void WhenFocusing()
+    protected override void OnFocusing()
     {
         //Debug.Log("Focusing");
         // Your code..
     }
 
-    protected override void WhenFocused() {
+    protected override void OnFocused() {
         //Debug.Log("Focused");
         // Your code..
+		if (m_IsFirstTimeEnter) {
+			if (m_StartEntering != null)
+				m_StartEntering ();
+			m_IsFirstTimeEnter = false;
+		}
     }
-    protected override void WhenBlurred() {
+    protected override void OnBlurred() {
         //Debug.Log("Blurred");
         // Your code..
     }
