@@ -8,7 +8,6 @@ public class PlayerController: MonoBehaviour {
     [SerializeField]
 	private AbstractSlideController[] m_AllSlides;
 
-	[SerializeField]
 	private List<AbstractSlideController> m_EnabledSlides;
 
 	[SerializeField] private Transform m_CameraRig;
