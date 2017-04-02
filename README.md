@@ -26,38 +26,51 @@ Clone the project to your machine and open with Unity 3D (5.4)
  * Matrix of Icosphere showing Percentage
 * CoreAnimation script that enables auto-rotation and micro-motion of elements
 
+## Version 1.1 Updates
+
+*	Added Custom Editor on PlayerController, simplified the steps of adding/removing/reordering slides
+*	Removed "Hidden" flag in AbstractSlideController, using Unity's native gameObject.activeSelf to enable/disable slides
+* Click each row in "Slides" section of PlayerController Custom Editor to Preview selected slide
+*	Minor bug fixes
+
 
 ## Usage
 
-### Using Default Theme
+### Using Default Templates
 1.	Copy "Empty Presentation" Scene and rename it to your presentation topic or whatever
-2.	Drag a master prefab from "/Default Theme" folder to the scene
-3.	Customize the content
-4.	Repeat 2) - 3) for other slides in your presentation
-5.	Drag each slide root from Hierarchy window to "Player" object's "Targets" array
+2.  Click on "Player" in the Hierarchy window
+3.  Click "+" in "Slides" panel in Inspector, select a template from Default Theme
+4.	Customize the content
+5.	Repeat 2) - 4) for other slides in your presentation
 6.	Hit play, now you can play the presentation (RMB and LMB to navigate to Next/Previous slide)
+7.  On "Player" Inspector, drag & drop to reorder slides if necessary
 7.	You can build the presentation to a .exe or WebGL file.
 
 ### Developing New Template (For programmers)
 1.	Create an empty gameObject "YourSlide" and attach "YourSlide.cs" that inherits "AbstractSlide.cs"
-2.	Create more gameObject like TextMesh, Globe, ParticleEffect, etc. under the "YourSlide". (Please refer to /Default Theme/Prefabs)
-3.	Add YourSlide to "Player"'s Targets array
-4.	Hit play, there you go
+2.	Create more gameObject like TextMesh, Globe, ParticleEffect, etc. under the "YourSlide". (Please refer to "Assets/Themes/Default/Prefabs")
+3.	Put YourAwesomeTemplate.prefab under "Assets/Themes/Default/Templates"
+4.	Use your template in the scene, hit play, there you go
+
+### Developing New Theme (For programmers)
+1.	Create a new folder in Assets/Themes, name to your theme
+2.	Please refer to the folder structure of "Assets/Themes/Default/Prefabs"
+3.	There at least should be a "Templates" directory in your theme folder
 
 
 ## Documentation And Tips
 
 (Documentation still in progress)
 
-1.	For those who wish to change the texture of the Globe element. The UV is compatible with standard Earth texture (Refer to NASA’s Texture at: http://visibleearth.nasa.gov/view.php?id=74192).
-2.	Always create the new slide with transform(0,0,0) since you can view from game camera in case any thing is out of boundary.
+1.	For those who wish to change the texture of the Globe element. The UV is compatible with standard earth [Equirectangular Projection](https://en.wikipedia.org/wiki/Equirectangular_projection) texture (Refer to NASA’s Texture [here](http://visibleearth.nasa.gov/view.php?id=74192)).
 
 
 ## Future Works
 * Entering and Exiting Animation
-* Easy of Use Custom Editor and Previews
+* Preview animation
 * Proxy that can fetch data via web services
-
+* Data Driven gameObject creation (inspired by D3.js)
+* VR/AR support
 
 ## Contributing
 
@@ -70,5 +83,5 @@ Clone the project to your machine and open with Unity 3D (5.4)
 
 ## Credits
 
-Hope you enjoy this little project. Feel free to build your own presentation templates under the framework, or include in your own project. Let me know your thoughts by jackchang26@gmail.com thanks! -Jack
+Hope you enjoy this little project. Feel free to build your own presentation templates under the framework, or include in your own project. Let me know your thoughts by jackchang26@gmail.com thanks! -Jack Zhang
 
