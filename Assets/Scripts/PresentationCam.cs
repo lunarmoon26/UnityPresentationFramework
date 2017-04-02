@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 using UnityStandardAssets.Cameras;
 using UnityStandardAssets.ImageEffects;
+using UnityPresentationFramework.Control;
 
 public class PresentationCam : PivotBasedCameraRig
 {
