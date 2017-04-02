@@ -5,11 +5,7 @@ using System.Collections;
 public abstract class AbstractSlideController : MonoBehaviour {
 
     [SerializeField]
-    private int m_Duration = 3;
-    [SerializeField]
-    private string m_SlideName = "";
-	[SerializeField]
-	private bool m_IsHidden = false;
+    private float m_Duration = 3;
 
     public delegate void OnFocusingEventDelegate();
     private OnFocusingEventDelegate m_OnFocusing;
@@ -45,13 +41,10 @@ public abstract class AbstractSlideController : MonoBehaviour {
     protected abstract void OnFocused();
     protected abstract void OnBlurred();
 
-    public int Duration {
+    public float Duration {
         get { return m_Duration; }
     }
 
-	public bool Hidden {
-		get { return m_IsHidden; }
-	}
     public OnFocusingEventDelegate Focusing
     {
         get { return m_OnFocusing; }
