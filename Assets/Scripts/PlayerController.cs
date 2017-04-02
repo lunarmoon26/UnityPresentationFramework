@@ -36,6 +36,7 @@ namespace UnityPresentationFramework.Control
                 m_EnabledSlides = new List<AbstractSlideController>();
                 m_AllSlides.ForEach(x =>
                 {
+                    if (x && x.gameObject.activeSelf)
                         m_EnabledSlides.Add(x);
                 });
             }
