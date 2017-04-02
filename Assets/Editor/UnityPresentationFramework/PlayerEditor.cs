@@ -30,7 +30,6 @@ namespace UnityPresentationFramework.Inspector{
             reorderableSlides.onAddDropdownCallback += AddItem;
             reorderableSlides.onRemoveCallback += RemoveItem;
             reorderableSlides.onSelectCallback += SelectItem;
-            reorderableSlides.onCanRemoveCallback += CanRemoveItem;
         }
 
         private void OnDisable()
@@ -40,7 +39,6 @@ namespace UnityPresentationFramework.Inspector{
             reorderableSlides.onAddDropdownCallback -= AddItem;
             reorderableSlides.onRemoveCallback -= RemoveItem;
             reorderableSlides.onSelectCallback -= SelectItem;
-            reorderableSlides.onCanRemoveCallback -= CanRemoveItem;
         }
 
         /// <summary>
@@ -125,10 +123,6 @@ namespace UnityPresentationFramework.Inspector{
                 EditorGUIUtility.PingObject(slideController.gameObject);
                 (target as PlayerController).PreviewAtSlide(list.index);
             }
-        }
-        private bool CanRemoveItem(ReorderableList list)
-        {
-            return list.count > 1;
         }
 
         public override void OnInspectorGUI()
