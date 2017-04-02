@@ -12,7 +12,7 @@ Furthermore, Unity is free. It supports WebGL, thus the presentation can be depl
 
 ## Installation
 
-Clone the project to your machine and open with Unity 3D (5.4)
+Clone the project to your machine and open with Unity 3D (5.5)
 
 
 ## Version 1.0 Features
