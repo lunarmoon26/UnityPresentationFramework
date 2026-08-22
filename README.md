@@ -1,4 +1,11 @@
 # Unity Presentation Framework
+
+> **Archived:** This Unity 5.5 project is retained for historical reference and
+> is no longer maintained. For active browser-native spatial presentation work,
+> see [PrismDeckJS](https://github.com/lunarmoon26/PrismDeckJS) and the
+> [PrismDeck Studio](https://lunarmoon26.github.io/PrismDeckJS/). PrismDeckJS is
+> an independent rewrite, not a drop-in replacement for this Unity project.
+
 An All-in-One Presentation Solution for Realtime Big Data Visualization
 
 ## Why Presentation in Unity
@@ -84,4 +91,3 @@ Clone the project to your machine and open with Unity 3D (5.5)
 ## Credits
 
 Hope you enjoy this little project. Feel free to build your own presentation templates under the framework, or include in your own project. Let me know your thoughts by jackchang26@gmail.com thanks! -Jack Zhang
-
